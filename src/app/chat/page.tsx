@@ -17,7 +17,7 @@ const Chat = () => {
     const socket = useRef<WebSocket | null>(null);
 
     useEffect(() => {
-        socket.current = new WebSocket('ws://next-fastapi-chat-backend.onrender.com//chat');
+        socket.current = new WebSocket('wss://next-fastapi-chat-backend.onrender.com//chat');
 
         socket.current.onmessage = (event) => {
             const json = JSON.parse(event.data);

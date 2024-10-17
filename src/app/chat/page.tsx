@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
+import ReconnectingWebSocket from 'reconnecting-websocket';
 
 type Message = {
     sessionID: string;
@@ -14,10 +15,10 @@ const Chat = () => {
     const [name, setName] = useState('名無し');
     const [inputMessage, setInputMessage] = useState('');
     const [messages, setMessages] = useState<Message[]>([]);
-    const socket = useRef<WebSocket | null>(null);
+    const socket = useRef<ReconnectingWebSocket | null>(null);
 
     useEffect(() => {
-        socket.current = new WebSocket('wss://next-fastapi-chat-backend.onrender.com/chat');
+        socket.current = new ReconnectingWebSocket('wss://next-fastapi-chat-backend.onrender.com/chat');
 
         socket.current.onmessage = (event) => {
             const json = JSON.parse(event.data);

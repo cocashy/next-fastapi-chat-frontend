@@ -18,7 +18,7 @@ const Chat = () => {
     const socket = useRef<ReconnectingWebSocket | null>(null);
 
     useEffect(() => {
-        socket.current = new ReconnectingWebSocket('wss://next-fastapi-chat-backend.onrender.com/chat');
+        socket.current = new ReconnectingWebSocket(`${process.env.NEXT_PUBLIC_API_WS_URL}/chat`);
 
         socket.current.onmessage = (event) => {
             const json = JSON.parse(event.data);

@@ -44,6 +44,7 @@ export const Chat = () => {
                 name: name,
                 content: inputMessage,
             });
+            socket.current.send(JSON.stringify(req));
             await fetch(`${process.env.NEXT_PUBLIC_API_URL}/messages`, {
                 method: 'POST',
                 headers: {
@@ -51,7 +52,6 @@ export const Chat = () => {
                 },
                 body: JSON.stringify(req),
             });
-            socket.current.send(JSON.stringify(req));
             setInputMessage('');  // メッセージ送信後に入力フィールドをクリア
         }
     };
